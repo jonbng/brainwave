@@ -1,7 +1,14 @@
+import ChatInput from "@/components/ChatInput";
+import TypingAnimation from "@/components/ui/typing-animation";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export default async function ChatPage() {
+export default async function ChatPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const supabase = await createClient();
 
   const {
@@ -12,13 +19,19 @@ export default async function ChatPage() {
     return redirect("/sign-in");
   }
 
+  function handleNewMessage(message: string) {
+    console.log(message);
+  }
+
   return (
-    <div className="flex-1 w-full flex flex-col gap-12">
-      <div className="flex flex-col gap-2 items-start">
-        <h2 className="font-bold text-2xl mb-4">Your user details</h2>
-        <pre className="text-xs font-mono p-3 rounded border max-h-32 overflow-auto">
-          {JSON.stringify(user, null, 2)}
-        </pre>
+    <div className="w-full h-full flex">
+      <div className="my-auto flex gap-6 flex-col">
+        <TypingAnimation
+          text="What can I help with?"
+          duration={40}
+          className="text-3xl"
+        />
+        <ChatInput />
       </div>
     </div>
   );

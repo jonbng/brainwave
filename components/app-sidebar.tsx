@@ -4,13 +4,8 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   useSidebar,
 } from "./ui/sidebar";
 import { Button } from "./ui/button";
@@ -18,7 +13,7 @@ import SidebarButtons from "./sidebar-buttons";
 import { ThemeSwitcher } from "./theme-switcher";
 import { signOutAction } from "@/app/actions";
 import { ScrollArea } from "./ui/scroll-area";
-import Link from "next/link";
+import { NavGroup } from "./nav-main";
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -64,52 +59,9 @@ export function AppSidebar() {
         </SidebarHeader>
         <SidebarContent>
           <ScrollArea className="flex-1 p-4">
-            <SidebarGroup title="Today" className="!px-0">
-              <SidebarGroupLabel className="!px-0">Today</SidebarGroupLabel>
-              <SidebarGroupContent className="!px-0">
-                <SidebarMenu>
-                  {last24Hours.map((item, index) => (
-                    <SidebarMenuItem key={index}>
-                      <SidebarMenuButton asChild>
-                        <Link href={item.href}>{item.title}</Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-            <SidebarGroup title="Previous 7 days" className="!px-0">
-              <SidebarGroupLabel className="!px-0">
-                Previous 7 days
-              </SidebarGroupLabel>
-              <SidebarGroupContent className="!px-0">
-                <SidebarMenu>
-                  {last7Days.map((item, index) => (
-                    <SidebarMenuItem key={index}>
-                      <SidebarMenuButton asChild>
-                        <Link href={item.href}>{item.title}</Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-            <SidebarGroup title="Last 30 days" className="!px-0">
-              <SidebarGroupLabel className="!px-0">
-                Last 30 days
-              </SidebarGroupLabel>
-              <SidebarGroupContent className="!px-0">
-                <SidebarMenu>
-                  {last30Days.map((item, index) => (
-                    <SidebarMenuItem key={index}>
-                      <SidebarMenuButton asChild>
-                        <Link href={item.href}>{item.title}</Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
+            <NavGroup title="Today" items={last24Hours} />
+            <NavGroup title="This week" items={last7Days} />
+            <NavGroup title="This month" items={last30Days} />
           </ScrollArea>
         </SidebarContent>
         <SidebarFooter className="flex flex-row">

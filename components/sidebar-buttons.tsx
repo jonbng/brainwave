@@ -1,15 +1,11 @@
 "use client";
 
-import {
-  TooltipArrow,
-  TooltipContent,
-  TooltipTrigger,
-} from "@radix-ui/react-tooltip";
 import { Button } from "./ui/button";
 import { useSidebar } from "./ui/sidebar";
-import { Tooltip } from "./ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { TooltipArrow } from "@radix-ui/react-tooltip";
 
 export default function SidebarButtons() {
   const { toggleSidebar, state } = useSidebar();

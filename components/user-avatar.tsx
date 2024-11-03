@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { LogOut, Settings } from "lucide-react";
+import { Button } from "./ui/button";
 
 export default function UserAvatar() {
   const [initials, setInitials] = useState<string | null>(null);
@@ -80,14 +81,20 @@ export default function UserAvatar() {
       <DropdownMenuContent
         side="bottom"
         align="end"
-        className="rounded-2xl p-3"
+        className="rounded-2xl p-2 gap-1 flex flex-col"
       >
-        <DropdownMenuItem className="rounded-xl">
-          <Settings /> <button className="w-full rounded-sm">Settings</button>
+        <DropdownMenuItem>
+          <Button className="w-full rounded-lg" variant="ghost">
+          <Settings />{" "}
+            Settings
+          </Button>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="rounded-xl">
-          <LogOut /> <button className="w-full rounded-sm">Sign Out</button>
+        <DropdownMenuSeparator className="mx-1"/>
+        <DropdownMenuItem>
+          <Button className="w-full rounded-lg" variant="ghost">
+          <LogOut />{" "}
+            Sign Out
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

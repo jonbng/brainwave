@@ -31,34 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider>
-            <TooltipProvider>
-              <div className="flex w-full">
-                <AppSidebar />
-                <SidebarInset>
-                  <main className="min-h-screen flex flex-col items-center flex-grow">
-                    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-                      <div className="w-full flex justify-end mr-8 mt-4">
-                        <UserAvatar />
-                      </div>
-                      <div className="flex flex-col gap-20 max-w-5xl p-5 h-full">
-                        {children}
-                      </div>
-                      <footer className="w-fit flex items-center justify-center mx-auto text-center text-xs gap-12 bottom-4 absolute">
-                        <Link href="/privacy" className="hover:underline">
-                          Privacy Policy
-                        </Link>
-                        <p>
-                          Brainwave can make mistakes. Please verify any
-                          information.
-                        </p>
-                      </footer>
-                    </div>
-                  </main>
-                </SidebarInset>
-              </div>
-            </TooltipProvider>
-          </SidebarProvider>
+          <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

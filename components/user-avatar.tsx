@@ -3,15 +3,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { LogOut, Settings } from "lucide-react";
-import { Button } from "./ui/button";
 
 export default function UserAvatar() {
   const [initials, setInitials] = useState<string | null>(null);
@@ -69,34 +60,11 @@ export default function UserAvatar() {
   }, []);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Avatar className="flex justify-center items-center cursor-pointer">
-          <AvatarImage src={avatarUrl ?? ""} alt={alt ?? "User Avatar"} />
-          <AvatarFallback className="bg-green-800">
-            {initials ?? "??"}
-          </AvatarFallback>
-        </Avatar>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        side="bottom"
-        align="end"
-        className="rounded-2xl p-2 gap-1 flex flex-col"
-      >
-        <DropdownMenuItem>
-          <Button className="w-full rounded-lg" variant="ghost">
-          <Settings />{" "}
-            Settings
-          </Button>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator className="mx-1"/>
-        <DropdownMenuItem>
-          <Button className="w-full rounded-lg" variant="ghost">
-          <LogOut />{" "}
-            Sign Out
-          </Button>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Avatar className="flex justify-center items-center cursor-pointer">
+      <AvatarImage src={avatarUrl ?? ""} alt={alt ?? "User Avatar"} />
+      <AvatarFallback className="bg-green-800">
+        {initials ?? "??"}
+      </AvatarFallback>
+    </Avatar>
   );
 }

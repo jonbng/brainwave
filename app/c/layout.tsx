@@ -5,8 +5,8 @@ import "../globals.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import UserAvatar from "@/components/user-avatar";
 import { ViewTransitions } from "next-view-transitions";
+import UserAvatarButton from "@/components/user-avatar-button";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -41,7 +41,7 @@ export default function ChatLayout({
                     <main className="min-h-screen flex flex-col items-center flex-grow">
                       <div className="flex-1 w-full flex flex-col gap-20 items-center">
                         <div className="w-full flex justify-end mr-8 mt-4">
-                          <UserAvatar />
+                          <UserAvatarButton />
                         </div>
                         <div className="flex flex-col gap-20 w-full p-5 h-full">
                           {children}

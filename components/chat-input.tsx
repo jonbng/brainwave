@@ -4,6 +4,8 @@ import { ArrowUp } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";
+import { redirect } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 
 // export default function ChatInput({
 //   handleNewMessage,
@@ -13,6 +15,7 @@ import { useState } from "react";
 export default function ChatInput() {
   const [message, setMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
+  const router = useTransitionRouter();
 
   function handleSubmit() {
     const messageText = message.trim();
@@ -21,6 +24,7 @@ export default function ChatInput() {
     setMessage("");
 
     // handleNewMessage(messageText);
+    router.push('/c/new?message=' + encodeURIComponent(messageText));
   }
 
   return (

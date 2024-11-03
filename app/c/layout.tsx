@@ -43,7 +43,7 @@ export default function ChatLayout({
                         <div className="w-full flex justify-end mr-8 mt-4">
                           <UserAvatar />
                         </div>
-                        <div className="flex flex-col gap-20 max-w-5xl p-5 h-full">
+                        <div className="flex flex-col gap-20 w-full p-5 h-full">
                           {children}
                         </div>
                         <footer className="w-fit flex items-center justify-center mx-auto text-center text-xs gap-12 bottom-4 absolute">

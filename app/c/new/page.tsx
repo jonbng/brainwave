@@ -4,12 +4,8 @@ import { ChatMessage } from "@/components/chat-messages";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export default async function ChatPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default async function ChatPage({ searchParams }: { searchParams: { message: string } }) {
+  const { message } = searchParams;
   const supabase = await createClient();
 
   const {
@@ -20,26 +16,16 @@ export default async function ChatPage({
     return redirect("/sign-in");
   }
 
-  function handleNewMessage(message: string) {
-    console.log(message);
-  }
-
   const messages: ChatMessage[] = [
     {
-      id: "1",
-      content: "Hello, how can I help you today?",
-      isMine: false,
-      timeSent: new Date(),
-    },
-    {
       id: "2",
-      content: "I need help with my order",
+      content: message || "I need help with my order",
       isMine: true,
       timeSent: new Date(new Date().getTime() + 60 * 1000),
     },
     {
       id: "3",
-      content: "Sure, what's your order number?",
+      content: "HIIII!",
       isMine: false,
       timeSent: new Date(new Date().getTime() + 120 * 1000),
     },

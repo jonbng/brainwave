@@ -21,29 +21,29 @@ export function AppSidebar() {
   const last24Hours = [
     {
       title: "School Project Ideas",
-      href: "/cr",
+      href: "/c/r",
     },
   ];
 
   const last7Days = [
     {
       title: "Homebrew Cask Audit Error",
-      href: "/cr",
+      href: "/c/r",
     },
     {
       title: "Drop Advice for Wii",
-      href: "/cr",
+      href: "/c/r",
     },
   ];
 
   const last30Days = [
     {
       title: "Digital Ticket System Ideas",
-      href: "/rc",
+      href: "/c/e",
     },
     {
       title: "Career Interests in Tech",
-      href: "/cr",
+      href: "/c/r",
     },
   ];
 

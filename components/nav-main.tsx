@@ -17,7 +17,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Button } from "./ui/button";
 
 export function NavGroup({
@@ -37,7 +37,9 @@ export function NavGroup({
           {items.map((item, index) => (
             <SidebarMenuItem key={index}>
               <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex">
-                <Link href={item.href} className="flex-grow">{item.title}</Link>
+                <Link href={item.href} className="flex-grow">
+                  {item.title}
+                </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <MoreHorizontal className="ml-auto" />

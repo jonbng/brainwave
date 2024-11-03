@@ -25,12 +25,7 @@ export default async function ChatPage({
 
   return (
     <div className="w-full h-full flex">
-      <div className="my-auto flex gap-6 flex-col">
-        <TypingAnimation
-          text="What can I help with?"
-          duration={40}
-          className="text-3xl"
-        />
+      <div className="mt-auto flex gap-6 flex-col mb-8">
         <ChatInput />
       </div>
     </div>

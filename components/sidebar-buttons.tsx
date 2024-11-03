@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { useSidebar } from "./ui/sidebar";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { redirect } from "next/navigation";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { TooltipArrow } from "@radix-ui/react-tooltip";
 
 export default function SidebarButtons() {

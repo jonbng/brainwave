@@ -34,12 +34,18 @@ export default function ChatInput() {
           setIsEmpty(e.target.value === "");
         }}
         onSubmit={handleSubmit}
+        style={{
+          viewTransitionName: "chat-input",
+        }}
       />
       <Button
         className="rounded-full -ml-12 !p-0"
         type="submit"
         size="icon"
         disabled={isEmpty}
+        style={{
+          viewTransitionName: "chat-icon",
+        }}
       >
         <ArrowUp strokeWidth={4} />
       </Button>

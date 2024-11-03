@@ -35,40 +35,37 @@ export function NavGroup({
       <SidebarGroupContent className="!px-0">
         <SidebarMenu>
           {items.map((item, index) => (
-            <DropdownMenu key={index}>
-              <SidebarMenuItem>
-                <DropdownMenuTrigger asChild>
-                  <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-                    <Link href={item.href}>{item.title}</Link>{" "}
+            <SidebarMenuItem key={index}>
+              <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex">
+                <Link href={item.href} className="flex-grow">{item.title}</Link>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
                     <MoreHorizontal className="ml-auto" />
-                  </SidebarMenuButton>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  side={isMobile ? "bottom" : "right"}
-                  align={isMobile ? "end" : "start"}
-                  className="rounded-2xl p-3"
-                >
-                  <DropdownMenuItem asChild>
-                    <Button
-                      variant="ghost"
-                      className="w-full rounded-lg"
-                    >
-                      <Pencil className="mr-2" />
-                      Rename
-                    </Button>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Button
-                      variant="ghost"
-                      className="w-full !text-destructive rounded-lg hover:!text-destructive"
-                    >
-                      <Trash className="mr-2" />
-                      Delete
-                    </Button>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </SidebarMenuItem>
-            </DropdownMenu>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    side={isMobile ? "bottom" : "right"}
+                    align={isMobile ? "end" : "start"}
+                    className="rounded-2xl p-3"
+                  >
+                    <DropdownMenuItem asChild>
+                      <Button variant="ghost" className="w-full rounded-lg">
+                        <Pencil className="mr-2" />
+                        Rename
+                      </Button>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Button
+                        variant="ghost"
+                        className="w-full !text-destructive rounded-lg hover:!text-destructive"
+                      >
+                        <Trash className="mr-2" />
+                        Delete
+                      </Button>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           ))}
         </SidebarMenu>
       </SidebarGroupContent>

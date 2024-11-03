@@ -22,7 +22,7 @@ export function AppSidebar() {
     {
       title: "School Project Ideas",
       href: "/c",
-    }
+    },
   ];
 
   const last7Days = [
@@ -33,7 +33,7 @@ export function AppSidebar() {
     {
       title: "Drop Advice for Wii",
       href: "/c",
-    }
+    },
   ];
 
   const last30Days = [
@@ -44,7 +44,7 @@ export function AppSidebar() {
     {
       title: "Career Interests in Tech",
       href: "/c",
-    }
+    },
   ];
 
   return (
@@ -59,9 +59,15 @@ export function AppSidebar() {
         </SidebarHeader>
         <SidebarContent>
           <ScrollArea className="flex-1 p-4">
-            <NavGroup title="Today" items={last24Hours} />
-            <NavGroup title="This week" items={last7Days} />
-            <NavGroup title="This month" items={last30Days} />
+            {last24Hours.length > 0 && (
+              <NavGroup title="Today" items={last24Hours} />
+            )}
+            {last7Days.length > 0 && (
+              <NavGroup title="This week" items={last7Days} />
+            )}
+            {last30Days.length > 0 && (
+              <NavGroup title="This month" items={last30Days} />
+            )}
           </ScrollArea>
         </SidebarContent>
         <SidebarFooter className="flex flex-row">

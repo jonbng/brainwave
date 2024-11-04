@@ -122,7 +122,10 @@ export default function SignUpPage() {
                 variant="outline"
                 className="w-full"
                 onClick={() =>
-                  supabase.auth.signInWithOAuth({ provider: "google" })
+                  supabase.auth.signInWithOAuth({
+                    provider: "google",
+                    options: { redirectTo: `${origin}/auth/callback` },
+                  })
                 }
               >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -150,7 +153,10 @@ export default function SignUpPage() {
                 variant="outline"
                 className="w-full"
                 onClick={() =>
-                  supabase.auth.signInWithOAuth({ provider: "github"})
+                  supabase.auth.signInWithOAuth({
+                    provider: "github",
+                    options: { redirectTo: `${origin}/auth/callback` },
+                  })
                 }
               >
                 <Github className="mr-2 h-4 w-4" />

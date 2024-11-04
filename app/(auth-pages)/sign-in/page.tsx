@@ -98,7 +98,10 @@ export default function SignInPage() {
               type="submit"
               className="w-full"
               onClick={() =>
-                supabase.auth.signInWithOAuth({ provider: "google" })
+                supabase.auth.signInWithOAuth({
+                  provider: "google",
+                  options: { redirectTo: `${origin}/auth/callback` },
+                })
               }
             >
               Sign In
@@ -143,7 +146,10 @@ export default function SignInPage() {
                 variant="outline"
                 className="w-full"
                 onClick={() =>
-                  supabase.auth.signInWithOAuth({ provider: "github", options: { redirectTo: `${origin}/auth/callback` } })
+                  supabase.auth.signInWithOAuth({
+                    provider: "github",
+                    options: { redirectTo: `${origin}/auth/callback` },
+                  })
                 }
               >
                 <Github className="mr-2 h-4 w-4" />

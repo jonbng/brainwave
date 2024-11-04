@@ -31,7 +31,6 @@ export default function ChatLayout({
             attribute="class"
             defaultTheme="system"
             enableSystem
-            disableTransitionOnChange
           >
             <SidebarProvider>
               <TooltipProvider>

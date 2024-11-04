@@ -23,7 +23,7 @@ import {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-background light">
+    <div className="min-h-screen bg-background">
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">

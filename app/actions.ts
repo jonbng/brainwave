@@ -5,9 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function signUpAction(formData: FormData): Promise<void> {
-  const email = formData.get("email")?.toString();
-  const password = formData.get("password")?.toString();
+export async function signUpAction({ email, password, name}: { email: string, password: string, name: string }): Promise<void> {
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
 
@@ -36,9 +34,7 @@ export async function signUpAction(formData: FormData): Promise<void> {
   }
 };
 
-export const signInAction = async (formData: FormData) => {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+export const signInAction = async ({ email, password }: { email: string, password: string }) => {
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signInWithPassword({
@@ -53,11 +49,9 @@ export const signInAction = async (formData: FormData) => {
   return redirect("/c");
 };
 
-export const forgotPasswordAction = async (formData: FormData) => {
-  const email = formData.get("email")?.toString();
+export const forgotPasswordAction = async (email: string, callbackUrl: string | null = null) => {
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
-  const callbackUrl = formData.get("callbackUrl")?.toString();
 
   if (!email) {
     return encodedRedirect("error", "/forgot-password", "Email is required");
@@ -87,11 +81,8 @@ export const forgotPasswordAction = async (formData: FormData) => {
   );
 };
 
-export const resetPasswordAction = async (formData: FormData) => {
+export const resetPasswordAction = async (password: string, confirmPassword: string) => {
   const supabase = await createClient();
-
-  const password = formData.get("password") as string;
-  const confirmPassword = formData.get("confirmPassword") as string;
 
   if (!password || !confirmPassword) {
     encodedRedirect(

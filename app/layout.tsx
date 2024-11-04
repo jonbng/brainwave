@@ -1,10 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import UserAvatar from "@/components/user-avatar";
 import { ViewTransitions } from "next-view-transitions";
 
 const defaultUrl = process.env.VERCEL_URL

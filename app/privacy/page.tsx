@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -23,7 +23,7 @@ import {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background light">
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
@@ -213,7 +213,9 @@ export default function PrivacyPolicy() {
               Our dedicated privacy team is here to help you understand how we
               protect your data.
             </p>
-            <Button size="lg">Contact Privacy Team</Button>
+            <Link href="mailto:privacy@arctix.dev">
+              <Button size="lg">Contact Privacy Team</Button>
+            </Link>
           </div>
         </section>
       </main>

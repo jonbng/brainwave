@@ -23,14 +23,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" className={GeistSans.className} suppressHydrationWarning>
         <body className="bg-background text-foreground">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
             <TooltipProvider>{children}</TooltipProvider>
-          </ThemeProvider>
         </body>
       </html>
     </ViewTransitions>

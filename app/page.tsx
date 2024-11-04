@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -27,7 +27,7 @@ export default function BrainwaveLanding() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground light">
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
@@ -35,10 +35,18 @@ export default function BrainwaveLanding() {
             <span className="text-2xl font-bold">Brainwave</span>
           </Link>
           <div className="flex items-center space-x-4">
-            <Button variant="ghost">Features</Button>
-            <Button variant="ghost">Privacy</Button>
-            <Button variant="outline">Log In</Button>
-            <Button>Sign Up</Button>
+            <Link href="#features">
+              <Button variant="ghost">Features</Button>
+            </Link>
+            <Link href="/privacy">
+              <Button variant="ghost">Privacy</Button>
+            </Link>
+            <Link href="/sign-in">
+              <Button variant="outline">Log In</Button>
+            </Link>
+            <Link href="/sign-up">
+              <Button>Sign Up</Button>
+            </Link>
           </div>
         </nav>
       </header>
@@ -68,14 +76,16 @@ export default function BrainwaveLanding() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Button size="lg" className="text-lg px-8 py-6">
-                Get Started
-              </Button>
+              <Link href="/sign-up">
+                <Button size="lg" className="text-lg px-8 py-6">
+                  Get Started
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </section>
 
-        <section className="py-20 px-6">
+        <section className="py-20 px-6" id="features">
           <div className="container mx-auto">
             <h2 className="text-4xl font-bold mb-12 text-center">
               Features that Inspire
@@ -165,7 +175,7 @@ export default function BrainwaveLanding() {
                       learning experiences, adapting to each student's unique
                       needs and learning style.
                     </p>
-                    <Button>Learn More</Button>
+                    <Button disabled={true}>Learn More</Button>
                   </CardContent>
                 </Card>
               </div>
@@ -234,6 +244,17 @@ export default function BrainwaveLanding() {
                 </Card>
               ))}
             </motion.div>
+              <div className="w-full items-center flex justify-center">
+              <Link href="/privacy" className="mt-10">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="bg-transparent hover:bg-primary-foreground hover:text-primary"
+                >
+                  Learn More
+                </Button>
+              </Link>
+              </div>
           </div>
         </section>
 
@@ -247,16 +268,20 @@ export default function BrainwaveLanding() {
               teachers with Brainwave.
             </p>
             <div className="flex justify-center space-x-4">
-              <Button size="lg" variant="secondary">
-                Learn More
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-transparent hover:bg-primary-foreground hover:text-primary"
-              >
-                Request Demo
-              </Button>
+              {/* <Link href="/sign-up">
+                <Button size="lg" variant="secondary">
+                  Learn More
+                </Button>
+              </Link> */}
+              <Link href="mailto:demo@arctix.dev">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-transparent hover:bg-primary-foreground hover:text-primary"
+                >
+                  Request Demo
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -276,7 +301,7 @@ export default function BrainwaveLanding() {
               Privacy Policy
             </Link>
             <Link
-              href="https://github.com/brainwave-ai"
+              href="https://github.com/arctixdev/brainwave"
               className="text-muted-foreground hover:text-foreground flex items-center"
             >
               <Github className="w-5 h-5 mr-2" />

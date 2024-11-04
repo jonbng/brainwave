@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Link } from "next-view-transitions";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -18,13 +18,17 @@ import {
 } from "lucide-react";
 import { redirect, useSearchParams } from "next/navigation";
 
-export default function BrainwaveLanding() {
+function RedirectToCode() {
   const searchParams = useSearchParams();
-  const code = searchParams.get("code")
+  const code = searchParams.get("code");
   if (code) {
     redirect("/auth/callback?=code=" + code);
   }
+  
+  return null;
+}
 
+export default function BrainwaveLanding() {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -35,6 +39,9 @@ export default function BrainwaveLanding() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Suspense fallback={null}>
+        <RedirectToCode />
+      </Suspense>
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">

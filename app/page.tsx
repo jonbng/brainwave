@@ -22,7 +22,7 @@ function RedirectToCode() {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   if (code) {
-    redirect("/auth/callback?=code=" + code);
+    redirect("/auth/callback?code=" + code);
   }
   
   return null;

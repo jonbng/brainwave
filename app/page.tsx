@@ -106,12 +106,12 @@ export default function BrainwaveLanding() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                {
-                  icon: <BookOpen className="w-8 h-8 mb-4" />,
-                  title: "Smart Study Guides",
-                  description:
-                    "AI-generated study materials tailored to each student's needs.",
-                },
+                // {
+                //   icon: <BookOpen className="w-8 h-8 mb-4" />,
+                //   title: "Smart Study Guides",
+                //   description:
+                //     "AI-generated study materials tailored to each student's needs.",
+                // },
                 {
                   icon: <Shield className="w-8 h-8 mb-4" />,
                   title: "Privacy First",

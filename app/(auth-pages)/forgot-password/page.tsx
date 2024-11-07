@@ -16,11 +16,10 @@ import { BrainCircuit, Mail, ArrowRight } from "lucide-react";
 import { Message } from "@/components/form-message";
 import { forgotPasswordAction } from "@/app/actions";
 
-export default async function ForgotPassword(props: { searchParams: Promise<Message> }) {
+export default function ForgotPassword(props: { searchParams: Promise<Message> }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const searchParams = await props.searchParams;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

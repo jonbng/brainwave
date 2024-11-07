@@ -39,7 +39,7 @@ export const signInAction = async ({ email, password }: { email: string, passwor
 
   const { error } = await supabase.auth.signInWithPassword({
     email,
-    password,
+    password
   });
 
   if (error) {

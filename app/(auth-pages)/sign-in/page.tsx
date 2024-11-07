@@ -21,6 +21,7 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const supabase = createClient();
 
@@ -33,6 +34,7 @@ export default function SignInPage() {
     }
     // Handle sign in logic here
     console.log("Signing in...", { email, password });
+    console.warn("Remember me functionality not implemented yet. Remember me:", rememberMe);
     signInAction({ email, password });
   };
 
@@ -81,7 +83,7 @@ export default function SignInPage() {
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <Checkbox id="remember" />
+                <Checkbox id="remember" checked={rememberMe} onChange={(e) => setRememberMe((e.target as HTMLInputElement).checked)}/>
                 <Label htmlFor="remember" className="text-sm">
                   Remember me
                 </Label>
@@ -97,12 +99,6 @@ export default function SignInPage() {
             <Button
               type="submit"
               className="w-full"
-              onClick={() =>
-                supabase.auth.signInWithOAuth({
-                  provider: "google",
-                  options: { redirectTo: `${origin}/auth/callback` },
-                })
-              }
             >
               Sign In
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -120,7 +116,16 @@ export default function SignInPage() {
               </div>
             </div>
             <div className="mt-4 flex gap-2">
-              <Button variant="outline" className="w-full">
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() =>
+                  supabase.auth.signInWithOAuth({
+                    provider: "google",
+                    options: { redirectTo: `${origin}/auth/callback` },
+                  })
+                }
+              >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"

@@ -121,6 +121,7 @@ export default function SignUpPage() {
               <Button
                 variant="outline"
                 className="w-full"
+                disabled
                 onClick={() =>
                   supabase.auth.signInWithOAuth({
                     provider: "google",

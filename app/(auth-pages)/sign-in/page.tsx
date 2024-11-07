@@ -117,6 +117,7 @@ export default function SignInPage() {
             </div>
             <div className="mt-4 flex gap-2">
               <Button
+                disabled
                 variant="outline"
                 className="w-full"
                 onClick={() =>

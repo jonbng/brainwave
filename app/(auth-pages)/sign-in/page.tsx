@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,7 @@ import {
 import { BrainCircuit, Mail, Lock, ArrowRight, Github } from "lucide-react";
 import { signInAction } from "@/app/actions";
 import { createClient } from "@/utils/supabase/client";
+import { useSearchParams } from "next/navigation";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -23,8 +24,6 @@ export default function SignInPage() {
   const [error, setError] = useState("");
   const [waiting, setWaiting] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-
-  const supabase = createClient();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,10 +35,61 @@ export default function SignInPage() {
     }
     // Handle sign in logic here
     console.log("Signing in...", { email, password });
-    console.warn("Remember me functionality not implemented yet. Remember me:", rememberMe);
+    console.warn(
+      "Remember me functionality not implemented yet. Remember me:",
+      rememberMe
+    );
     signInAction({ email, password });
     setWaiting(false);
   };
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignInContent
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        error={error}
+        waiting={waiting}
+        rememberMe={rememberMe}
+        setRememberMe={setRememberMe}
+        handleSubmit={handleSubmit}
+        setError={setError}
+      />
+    </Suspense>
+  )
+}
+
+interface SignInContentProps {
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  error: string;
+  waiting: boolean;
+  rememberMe: boolean;
+  setRememberMe: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmit: (e: React.FormEvent) => void;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function SignInContent({
+  email,
+  setEmail,
+  password,
+  setPassword,
+  error,
+  waiting,
+  rememberMe,
+  setRememberMe,
+  setError,
+  handleSubmit,
+}: SignInContentProps) {
+  const searchParams = useSearchParams();
+  const searchError = searchParams.get("error");
+  if (searchError) setError(searchError);
+  const supabase = createClient();
 
   return (
     <div className="min-h-screen bg-background flex flex-col justify-center items-center p-4">
@@ -86,7 +136,13 @@ export default function SignInPage() {
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <Checkbox id="remember" checked={rememberMe} onChange={(e) => setRememberMe((e.target as HTMLInputElement).checked)}/>
+                <Checkbox
+                  id="remember"
+                  checked={rememberMe}
+                  onChange={(e) =>
+                    setRememberMe((e.target as HTMLInputElement).checked)
+                  }
+                />
                 <Label htmlFor="remember" className="text-sm">
                   Remember me
                 </Label>

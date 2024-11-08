@@ -21,12 +21,14 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [waiting, setWaiting] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
   const supabase = createClient();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setWaiting(true);
     setError("");
     if (!email || !password) {
       setError("Please fill in all fields");
@@ -99,6 +101,7 @@ export default function SignInPage() {
             <Button
               type="submit"
               className="w-full"
+              disabled={!email || !password || waiting}
             >
               Sign In
               <ArrowRight className="ml-2 h-4 w-4" />

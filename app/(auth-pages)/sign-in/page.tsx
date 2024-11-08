@@ -38,6 +38,7 @@ export default function SignInPage() {
     console.log("Signing in...", { email, password });
     console.warn("Remember me functionality not implemented yet. Remember me:", rememberMe);
     signInAction({ email, password });
+    setWaiting(false);
   };
 
   return (

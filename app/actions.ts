@@ -5,7 +5,9 @@ import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function signUpAction({ email, password, name}: { email: string, password: string, name: string }): Promise<void> {
+export async function signUpAction(
+  { email, password, name }: { email: string; password: string; name: string },
+): Promise<void> {
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
 
@@ -32,14 +34,16 @@ export async function signUpAction({ email, password, name}: { email: string, pa
       "Thanks for signing up! Please check your email for a verification link.",
     );
   }
-};
+}
 
-export const signInAction = async ({ email, password }: { email: string, password: string }) => {
+export const signInAction = async (
+  { email, password }: { email: string; password: string },
+) => {
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signInWithPassword({
     email,
-    password
+    password,
   });
 
   if (error) {
@@ -49,7 +53,10 @@ export const signInAction = async ({ email, password }: { email: string, passwor
   return redirect("/c");
 };
 
-export const forgotPasswordAction = async (email: string, callbackUrl: string | null = null) => {
+export const forgotPasswordAction = async (
+  email: string,
+  callbackUrl: string | null = null,
+) => {
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
 
@@ -81,7 +88,10 @@ export const forgotPasswordAction = async (email: string, callbackUrl: string | 
   );
 };
 
-export const resetPasswordAction = async (password: string, confirmPassword: string) => {
+export const resetPasswordAction = async (
+  password: string,
+  confirmPassword: string,
+) => {
   const supabase = await createClient();
 
   if (!password || !confirmPassword) {

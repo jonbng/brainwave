@@ -14,19 +14,10 @@ import {
 } from "@/components/ui/card";
 import { BrainCircuit, Lock, ArrowRight } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
-import { redirect } from "next/navigation";
 import { resetPasswordAction } from "@/app/actions";
 
-export default async function ResetPassword() {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/sign-in");
-  }
+export default function ResetPassword() {
+  const supabase = createClient();
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

@@ -8,16 +8,13 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { LogOut, Settings } from "lucide-react";
-import { Button } from "./ui/button";
 import UserAvatar from "./user-avatar";
+import { signOutAction } from "@/app/actions";
 
 export default function UserAvatarButton() {
   return (
-    <>
-      hello!
-      <DropdownMenu>
-        hey
-      <DropdownMenuTrigger asChild>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
         <UserAvatar />
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -25,19 +22,14 @@ export default function UserAvatarButton() {
         align="end"
         className="rounded-2xl p-2 gap-1 flex flex-col"
       >
-        <DropdownMenuItem>
-          <Button className="w-full rounded-lg" variant="ghost">
-            <Settings /> Settings
-          </Button>
+        <DropdownMenuItem className="rounded-lg p-3 m-0.5">
+          <Settings /> Settings
         </DropdownMenuItem>
         <DropdownMenuSeparator className="mx-1" />
-        <DropdownMenuItem>
-          <Button className="w-full rounded-lg" variant="ghost">
-            <LogOut /> Sign Out
-          </Button>
+        <DropdownMenuItem className="rounded-lg p-3 m-0.5" onSelect={() => signOutAction()}>
+          <LogOut /> Sign Out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-    </>
   );
 }

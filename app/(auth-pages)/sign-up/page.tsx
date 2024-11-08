@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,8 +28,72 @@ export default function SignUpPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [waiting, setWaiting] = useState(false);
+  const supabase = createClient();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setWaiting(true);
+    setError("");
+    if (!name || !email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    // Handle sign up logic here
+    console.log("Signing up...", { name, email, password });
+    signUpAction({ name, email, password });
+  };
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpContent
+        name={name}
+        setName={setName}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        error={error}
+        setError={setError}
+        waiting={waiting}
+        // setWaiting={setWaiting}
+        handleSubmit={handleSubmit}
+        supabase={supabase}
+      />
+    </Suspense>
+  );
+}
+
+interface SignUpContentProps {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  error: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+  waiting: boolean;
+  handleSubmit: (e: React.FormEvent) => void;
+  supabase: any;
+}
+
+function SignUpContent({
+  name,
+  setName,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  error,
+  setError,
+  waiting,
+  handleSubmit,
+  supabase,
+}: SignUpContentProps) {
   const searchParams = useSearchParams();
-  const [error, setError] = useState(searchParams.get("error") || "");
+  setError(searchParams.get("error") || "");
 
   if (searchParams.get("success")) {
     return (
@@ -57,20 +121,6 @@ export default function SignUpPage() {
       </div>
     );
   }
-
-  const supabase = createClient();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    if (!name || !email || !password) {
-      setError("Please fill in all fields");
-      return;
-    }
-    // Handle sign up logic here
-    console.log("Signing up...", { name, email, password });
-    signUpAction({ name, email, password });
-  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col justify-center items-center p-4">
@@ -130,7 +180,7 @@ export default function SignUpPage() {
               </div>
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={waiting}>
               Sign Up
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

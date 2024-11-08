@@ -12,9 +12,11 @@ import { Button } from "./ui/button";
 import UserAvatar from "./user-avatar";
 
 export default function UserAvatarButton() {
-
   return (
-    <DropdownMenu>
+    <>
+      hello!
+      <DropdownMenu>
+        hey
       <DropdownMenuTrigger asChild>
         <UserAvatar />
       </DropdownMenuTrigger>
@@ -36,5 +38,6 @@ export default function UserAvatarButton() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+    </>
   );
 }

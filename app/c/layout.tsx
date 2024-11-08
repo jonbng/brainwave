@@ -27,11 +27,7 @@ export default function ChatLayout({
     <ViewTransitions>
       <html lang="en" className={GeistSans.className} suppressHydrationWarning>
         <body className="bg-background text-foreground">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-          >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <SidebarProvider>
               <TooltipProvider>
                 <div className="flex w-full">
@@ -40,6 +36,7 @@ export default function ChatLayout({
                     <main className="min-h-screen flex flex-col items-center flex-grow">
                       <div className="flex-1 w-full flex flex-col gap-20 items-center">
                         <div className="w-full flex justify-end mr-8 mt-4">
+                          h
                           <UserAvatarButton />
                         </div>
                         <div className="flex flex-col gap-20 w-full p-5 h-full">

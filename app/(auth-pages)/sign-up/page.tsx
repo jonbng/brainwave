@@ -22,12 +22,41 @@ import {
 } from "lucide-react";
 import { signUpAction } from "@/app/actions";
 import { createClient } from "@/utils/supabase/client";
+import { useSearchParams } from "next/navigation";
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const searchParams = useSearchParams();
+  const [error, setError] = useState(searchParams.get("error") || "");
+
+  if (searchParams.get("success")) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col justify-center items-center p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-center">
+              Account Created
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-center text-muted-foreground">
+              {searchParams.get("success")}
+            </p>
+          </CardContent>
+          <CardFooter>
+            <p className="text-center text-sm text-muted-foreground w-full">
+              Already have an account?{" "}
+              <Link href="/sign-in" className="text-primary hover:underline">
+                Sign in
+              </Link>
+            </p>
+          </CardFooter>
+        </Card>
+      </div>
+    );
+  }
 
   const supabase = createClient();
 

@@ -1,6 +1,5 @@
 import ChatMessages from "@/components/chat-messages";
 import ChatInput from "@/components/chat-input";
-import { ChatMessage } from "@/components/chat-messages";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -20,30 +19,15 @@ export default async function ChatPage({
     return redirect("/sign-in");
   }
 
-  function handleNewMessage(message: string) {
-    console.log(message);
-  }
+  const messages = (await supabase.from("messages").select().eq("chat_id", id)).data;
 
-  const messages: ChatMessage[] = [
-    {
-      id: "1",
-      content: "Hello, how can I help you today?",
-      isMine: false,
-      timeSent: new Date(),
-    },
-    {
-      id: "2",
-      content: "I need help with my order",
-      isMine: true,
-      timeSent: new Date(new Date().getTime() + 60 * 1000),
-    },
-    {
-      id: "3",
-      content: "Sure, what's your order number?",
-      isMine: false,
-      timeSent: new Date(new Date().getTime() + 120 * 1000),
-    },
-  ];
+  if (!messages || messages?.length === 0) {
+    console.error("Failed to fetch messages");
+    console.log(messages);
+    return redirect("/c");
+  } else {
+    console.log("Messages:", messages);
+  }
 
   return (
     <div className="w-full h-full flex flex-col">

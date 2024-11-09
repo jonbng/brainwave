@@ -1,35 +1,33 @@
+"use client";
+
 import ChatMessages from "@/components/chat-messages";
 import ChatInput from "@/components/chat-input";
-import { ChatMessage } from "@/components/chat-messages";
-import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { CreateChat } from "./newChatAction";
+import { Database } from "@/utils/supabase/database.types";
+import { useTransitionRouter } from "next-view-transitions";
 
-export default async function ChatPage({ searchParams }: { searchParams: { message: string } }) {
+export default function ChatPage({ searchParams }: { searchParams: { message: string } }) {
   const { message } = searchParams;
-  const supabase = await createClient();
+  const router = useTransitionRouter();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/sign-in");
+  if (!message) {
+    return redirect("/c");
   }
 
-  const messages: ChatMessage[] = [
+  CreateChat(message).then((url) => {
+    router.push(url);
+  });
+
+  const messages: Database["public"]["Tables"]["messages"]["Row"][] = [
     {
-      id: "2",
-      content: message || "I need help with my order",
-      isMine: true,
-      timeSent: new Date(new Date().getTime() + 60 * 1000),
+      id: 1,
+      chat_id: 1,
+      content: message,
+      isUsers: true,
+      created_at: new Date().toISOString(),
     },
-    {
-      id: "3",
-      content: "HIIII!",
-      isMine: false,
-      timeSent: new Date(new Date().getTime() + 120 * 1000),
-    },
-  ];
+  ]
 
   return (
     <div className="w-full h-full flex flex-col">

@@ -3,21 +3,18 @@ import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 import UserAvatar from "./user-avatar";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-
-export interface ChatMessage {
-  id: string;
-  content: string;
-  isMine: boolean;
-  timeSent: Date;
-}
+import { Database } from "@/utils/supabase/database.types";
 
 export default function ChatMessages({
   messages,
 }: {
-  messages: ChatMessage[];
+  messages: Database["public"]["Tables"]["messages"]["Row"][];
 }) {
   // Sort messages by date
-  messages.sort((a, b) => a.timeSent.getTime() - b.timeSent.getTime());
+  messages.sort(
+    (a, b) =>
+      new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+  );
 
   return (
     <ScrollArea className="flex-1 p-4">
@@ -25,8 +22,8 @@ export default function ChatMessages({
         {messages.map((message, index) => (
           <div key={index} className="flex gap-4">
             {/* {!message.isMine && <div className="w-12" />} */}
-            {message.isMine && <UserAvatar />}
-            {!message.isMine && (
+            {message.isUsers && <UserAvatar />}
+            {!message.isUsers && (
               <Avatar>
                 <AvatarImage
                   src="/brainwave-avatar.jpg"
@@ -37,14 +34,14 @@ export default function ChatMessages({
             )}
             <div className="space-y-2 flex-1">
               <div className="font-semibold">
-                {message.isMine ? "You" : "Brainwave"}
+                {message.isUsers ? "You" : "Brainwave"}
               </div>
               <div className="prose dark:prose-invert">
                 {message.content.split("\n").map((line, i) => (
                   <p key={i}>{line}</p>
                 ))}
               </div>
-              {!message.isMine && (
+              {!message.isUsers && (
                 <div className="flex gap-2">
                   <Button variant="ghost" size="icon">
                     <Copy className="h-4 w-4" />

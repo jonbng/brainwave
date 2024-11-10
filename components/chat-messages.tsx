@@ -4,6 +4,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import UserAvatar from "./user-avatar";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Message } from "ai";
+import { Markdown } from "./markdown";
 
 export default function ChatMessages({ messages }: { messages: Message[] }) {
   // Sort messages by date
@@ -23,7 +24,7 @@ export default function ChatMessages({ messages }: { messages: Message[] }) {
             {message.role === "assistant" && (
               <Avatar>
                 <AvatarImage
-                  src="/brainwave-avatar.jpg"
+                  src="/brainwave.png"
                   alt="Brainwave Avatar"
                 />
                 <AvatarFallback>BW</AvatarFallback>
@@ -34,9 +35,7 @@ export default function ChatMessages({ messages }: { messages: Message[] }) {
                 {message.role === "user" ? "You" : "Brainwave"}
               </div>
               <div className="prose dark:prose-invert">
-                {message.content.split("\n").map((line, i) => (
-                  <p key={i}>{line}</p>
-                ))}
+                <Markdown>{message.content}</Markdown>
               </div>
               {message.role === "assistant" && (
                 <div className="flex gap-2">

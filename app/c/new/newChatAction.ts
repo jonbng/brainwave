@@ -42,5 +42,5 @@ export async function CreateChat(message: string) {
   }
 
   // URL to redirect to after sign up process completes
-  return `/c/${newChat.data.id}`;
+  return `/c/${newChat.data.id}?isNew=yes`;
 }

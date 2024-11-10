@@ -14,38 +14,68 @@ import { ThemeSwitcher } from "./theme-switcher";
 import { signOutAction } from "@/app/actions";
 import { ScrollArea } from "./ui/scroll-area";
 import { NavGroup } from "./nav-main";
+import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
+import type { Database } from "@/utils/supabase/database.types";
 
 export function AppSidebar() {
   const { state } = useSidebar();
+  const supabase = createClient();
+  const [today, setToday] = useState<
+    Database["public"]["Tables"]["chats"]["Row"][]
+  >([]);
+  const [last7Days, setLast7Days] = useState<
+    Database["public"]["Tables"]["chats"]["Row"][]
+  >([]);
+  const [last30Days, setLast30Days] = useState<
+    Database["public"]["Tables"]["chats"]["Row"][]
+  >([]);
+  const [loading, setLoading] = useState(true);
 
-  const last24Hours = [
-    {
-      title: "School Project Ideas",
-      href: "/c/r",
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const chatResponse = await supabase.from("chats").select();
+      if (chatResponse.error) {
+        console.error("Failed to fetch chats");
+        console.error(chatResponse.error);
+        return;
+      }
+      const chats = chatResponse.data;
 
-  const last7Days = [
-    {
-      title: "Homebrew Cask Audit Error",
-      href: "/c/r",
-    },
-    {
-      title: "Drop Advice for Wii",
-      href: "/c/r",
-    },
-  ];
+      setToday(
+        chats.filter((chat) => {
+          const createdAt = new Date(chat.created_at);
+          const now = new Date();
+          return now.getDate() === createdAt.getDate();
+        })
+      );
 
-  const last30Days = [
-    {
-      title: "Digital Ticket System Ideas",
-      href: "/c/e",
-    },
-    {
-      title: "Career Interests in Tech",
-      href: "/c/r",
-    },
-  ];
+      setLast7Days(
+        chats.filter((chat) => {
+          const createdAt = new Date(chat.created_at);
+          const now = new Date();
+          const diff = now.getTime() - createdAt.getTime();
+          return (
+            diff < 7 * 24 * 60 * 60 * 1000 &&
+            now.getDate() !== createdAt.getDate()
+          );
+        })
+      );
+
+      setLast30Days(
+        chats.filter((chat) => {
+          const createdAt = new Date(chat.created_at);
+          const now = new Date();
+          const diff = now.getTime() - createdAt.getTime();
+          return (
+            diff < 30 * 24 * 60 * 60 * 1000 && diff >= 7 * 24 * 60 * 60 * 1000
+          );
+        })
+      );
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -58,17 +88,30 @@ export function AppSidebar() {
           </SidebarMenu>
         </SidebarHeader>
         <SidebarContent>
-          <ScrollArea className="flex-1 p-4">
-            {last24Hours.length > 0 && (
-              <NavGroup title="Today" items={last24Hours} />
+          {today.length === 0 &&
+            last7Days.length === 0 &&
+            last30Days.length === 0 &&
+            !loading && (
+              <div className="flex-1 p-4 text-center text-gray-400">
+                No chats to show
+              </div>
             )}
-            {last7Days.length > 0 && (
-              <NavGroup title="This week" items={last7Days} />
-            )}
-            {last30Days.length > 0 && (
-              <NavGroup title="This month" items={last30Days} />
-            )}
-          </ScrollArea>
+          {loading && (
+            <div className="flex-1 p-4 text-center text-gray-400">Loading...</div>
+          )}
+          {(today.length > 0 ||
+            last7Days.length > 0 ||
+            last30Days.length > 0) && (
+            <ScrollArea className="flex-1 p-4">
+              {today.length > 0 && <NavGroup title="Today" items={today} />}
+              {last7Days.length > 0 && (
+                <NavGroup title="This week" items={last7Days} />
+              )}
+              {last30Days.length > 0 && (
+                <NavGroup title="This month" items={last30Days} />
+              )}
+            </ScrollArea>
+          )}
         </SidebarContent>
         <SidebarFooter className="flex flex-row">
           <form action={signOutAction} className="flex-grow">

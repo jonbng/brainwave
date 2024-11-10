@@ -3,18 +3,15 @@ import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 import UserAvatar from "./user-avatar";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Database } from "@/utils/supabase/database.types";
+import { Message } from "ai";
 
-export default function ChatMessages({
-  messages,
-}: {
-  messages: Database["public"]["Tables"]["messages"]["Row"][];
-}) {
+export default function ChatMessages({ messages }: { messages: Message[] }) {
   // Sort messages by date
-  messages.sort(
-    (a, b) =>
-      new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-  );
+  // if (messages.length > 1) {
+  //   console.warn("Sorting messages by date");
+  //   console.warn(messages);
+  //   messages.sort((a, b) => a.createdAt!.getTime() - b.createdAt!.getTime());
+  // }
 
   return (
     <ScrollArea className="flex-1 p-4">
@@ -22,8 +19,8 @@ export default function ChatMessages({
         {messages.map((message, index) => (
           <div key={index} className="flex gap-4">
             {/* {!message.isMine && <div className="w-12" />} */}
-            {message.isUsers && <UserAvatar />}
-            {!message.isUsers && (
+            {message.role === "user" && <UserAvatar />}
+            {message.role === "assistant" && (
               <Avatar>
                 <AvatarImage
                   src="/brainwave-avatar.jpg"
@@ -34,14 +31,14 @@ export default function ChatMessages({
             )}
             <div className="space-y-2 flex-1">
               <div className="font-semibold">
-                {message.isUsers ? "You" : "Brainwave"}
+                {message.role === "user" ? "You" : "Brainwave"}
               </div>
               <div className="prose dark:prose-invert">
                 {message.content.split("\n").map((line, i) => (
                   <p key={i}>{line}</p>
                 ))}
               </div>
-              {!message.isUsers && (
+              {message.role === "assistant" && (
                 <div className="flex gap-2">
                   <Button variant="ghost" size="icon">
                     <Copy className="h-4 w-4" />

@@ -1,12 +1,14 @@
-import ChatMessages from "@/components/chat-messages";
-import ChatInput from "@/components/chat-input";
+import ChatUi from "@/components/chat-ui";
+import { convertToUIMessages } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export default async function ChatPage({
   params,
+  searchParams,
 }: {
-  params: Promise<{ id: string }>;
+    params: Promise<{ id: string }>;
+    searchParams: { isNew: string };
 }) {
   const { id } = await params;
   const supabase = await createClient();
@@ -17,6 +19,8 @@ export default async function ChatPage({
 
   if (!user) {
     return redirect("/sign-in");
+  } else if (!id) {
+    return notFound();
   }
 
   const messages = (await supabase.from("messages").select().eq("chat_id", id)).data;
@@ -24,17 +28,10 @@ export default async function ChatPage({
   if (!messages || messages?.length === 0) {
     console.error("Failed to fetch messages");
     console.log(messages);
-    return redirect("/c");
-  } else {
-    console.log("Messages:", messages);
+    return notFound();
   }
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <ChatMessages messages={messages} />
-      <div className="mt-auto mx-auto flex gap-6 flex-col mb-8">
-        <ChatInput />
-      </div>
-    </div>
+    <ChatUi id={Number(id)} initialMessages={convertToUIMessages(messages)} isNew={searchParams.isNew === "yes"} />
   );
 }

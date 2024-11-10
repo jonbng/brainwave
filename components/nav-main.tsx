@@ -19,25 +19,30 @@ import {
 } from "@/components/ui/sidebar";
 import { Link } from "next-view-transitions";
 import { Button } from "./ui/button";
+import { Database } from "@/utils/supabase/database.types";
+import { createClient } from "@/utils/supabase/client";
+import { useState } from "react";
 
 export function NavGroup({
   title,
   items,
 }: {
   title: string;
-  items: { title: string; href: string }[];
+  items: Database["public"]["Tables"]["chats"]["Row"][];
 }) {
   const { isMobile } = useSidebar();
+  const supabase = createClient();
+  const [chats, setChats] = useState<Database["public"]["Tables"]["chats"]["Row"][]>(items);
 
   return (
     <SidebarGroup title={title} className="!px-0">
       <SidebarGroupLabel className="!px-0">{title}</SidebarGroupLabel>
       <SidebarGroupContent className="!px-0">
         <SidebarMenu>
-          {items.map((item, index) => (
+          {chats.map((item, index) => (
             <SidebarMenuItem key={index}>
               <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex">
-                <Link href={item.href} className="flex-grow">
+                <Link href={`/c/${item.id}`} className="flex-grow">
                   {item.title}
                 </Link>
                 <DropdownMenu>
@@ -59,6 +64,20 @@ export function NavGroup({
                       <Button
                         variant="ghost"
                         className="w-full !text-destructive rounded-lg hover:!text-destructive"
+                        onClick={async () => {
+                          const response = await supabase
+                            .from("chats")
+                            .delete()
+                            .eq("id", item.id);
+                          if (response.error) {
+                            console.error("Failed to delete chat");
+                            console.error(response.error);
+                          } else {
+                            // Remove the chat from the list
+                            // This will trigger a re-render
+                            setChats((prev) => prev.filter((chat) => chat.id !== item.id));
+                          }
+                        }}
                       >
                         <Trash className="mr-2" />
                         Delete

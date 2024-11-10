@@ -4,8 +4,8 @@ import ChatMessages from "@/components/chat-messages";
 import ChatInput from "@/components/chat-input";
 import { redirect } from "next/navigation";
 import { CreateChat } from "./newChatAction";
-import { Database } from "@/utils/supabase/database.types";
 import { useTransitionRouter } from "next-view-transitions";
+import { Message } from "ai";
 
 export default function ChatPage({ searchParams }: { searchParams: { message: string } }) {
   const { message } = searchParams;
@@ -19,13 +19,12 @@ export default function ChatPage({ searchParams }: { searchParams: { message: st
     router.push(url);
   });
 
-  const messages: Database["public"]["Tables"]["messages"]["Row"][] = [
+  const messages: Message[] = [
     {
-      id: 1,
-      chat_id: 1,
       content: message,
-      isUsers: true,
-      created_at: new Date().toISOString(),
+      role: "user",
+      createdAt: new Date(),
+      id: "1",
     },
   ]
 
@@ -33,7 +32,7 @@ export default function ChatPage({ searchParams }: { searchParams: { message: st
     <div className="w-full h-full flex flex-col">
       <ChatMessages messages={messages} />
       <div className="mt-auto mx-auto flex gap-6 flex-col mb-8">
-        <ChatInput />
+        <ChatInput handleSubmit={() => { }} input="" isLoading={true} handleInputChange={(e) => {}} />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { createClient } from "@/utils/supabase/client";
 import { notFound } from "next/navigation";
 import { Message, useChat } from "ai/react";
 import { useTransitionRouter } from "next-view-transitions";
+import { ChatRequestOptions } from "ai";
 
 export default function ChatPage({ id, initialMessages, isNew = false }: { id: number, initialMessages?: Message[], isNew?: boolean }) {
   const supabase = createClient();
@@ -22,14 +23,10 @@ export default function ChatPage({ id, initialMessages, isNew = false }: { id: n
 
   const {
     messages,
-    setMessages,
     handleSubmit,
     input,
     handleInputChange,
-    append,
-    isLoading,
-    stop,
-    data: streamingData,
+    isLoading
   } = useChat({
     body: { chat_id: id },
     initialMessages,
@@ -37,12 +34,25 @@ export default function ChatPage({ id, initialMessages, isNew = false }: { id: n
       await supabase.from("messages").insert({
         content: message.content,
         chat_id: id,
-        isUsers: message.role === "user",
-        created_at: new Date().toISOString(),
-        id: Number(message.id),
+        isUsers: message.role === "user"
       });
     },
   });
+
+  async function handleSubmitWithSave(
+    event?: {
+      preventDefault?: () => void;
+    },
+    chatRequestOptions?: ChatRequestOptions
+  ) {
+    await supabase.from("messages").insert({
+      content: input,
+      chat_id: id,
+      isUsers: true
+    });
+
+    handleSubmit(event, chatRequestOptions);
+  }
 
   if (true) {
     console.log("Streaming data");
@@ -53,7 +63,7 @@ export default function ChatPage({ id, initialMessages, isNew = false }: { id: n
       <ChatMessages messages={messages} />
       <div className="mt-auto mx-auto flex gap-6 flex-col mb-8">
         <ChatInput
-          handleSubmit={handleSubmit}
+          handleSubmit={handleSubmitWithSave}
           input={input}
           handleInputChange={handleInputChange}
           isLoading={isLoading}

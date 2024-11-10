@@ -50,9 +50,9 @@ export const updateSession = async (request: NextRequest) => {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
-    // if (request.nextUrl.pathname === "/" && !user.error) {
-    //   return NextResponse.redirect(new URL("/c", request.url));
-    // }
+    if ((request.nextUrl.pathname === "/" || request.nextUrl.pathname === "/privacy") && !user.error) {
+      return NextResponse.redirect(new URL("/c", request.url));
+    }
 
     return response;
   } catch (e) {

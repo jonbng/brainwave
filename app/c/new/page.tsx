@@ -2,22 +2,33 @@
 
 import ChatMessages from "@/components/chat-messages";
 import ChatInput from "@/components/chat-input";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { CreateChat } from "./newChatAction";
 import { Message } from "ai";
 import { Suspense } from "react";
+import { useTransitionRouter } from "next-view-transitions";
 
 function ChatPageContent() {
   const searchParams = useSearchParams();
   const message = searchParams.get("message");
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   if (!message) {
     return redirect("/c");
   }
 
   CreateChat(message).then((url) => {
-    router.push(url);
+    if (url) {
+      try {
+        router.push(url);
+      } catch (error) {
+        // Handle error case
+        router.push("/c");
+      }
+    } else {
+      // Handle error case
+      router.push("/c");
+    }
   });
 
   const messages: Message[] = [

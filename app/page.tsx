@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { Link } from "next-view-transitions";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {

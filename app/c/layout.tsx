@@ -33,7 +33,7 @@ export default function ChatLayout({
                 <div className="flex w-full">
                   <AppSidebar />
                   <SidebarInset>
-                    <main className="min-h-screen flex flex-col items-center flex-grow">
+                    <main className="min-h-screen flex flex-col items-center grow">
                       <div className="flex-1 w-full flex flex-col gap-20 items-center">
                         <div className="w-full flex justify-end mr-8 mt-4">
                           <UserAvatarButton />

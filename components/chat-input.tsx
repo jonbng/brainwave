@@ -43,7 +43,7 @@ export default function ChatInput({
         }}
       />
       <Button
-        className="rounded-full -ml-12 !p-0"
+        className="rounded-full -ml-12 p-0!"
         onClick={handleEnter}
         size="icon"
         disabled={isLoading}

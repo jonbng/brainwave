@@ -35,14 +35,14 @@ export function NavGroup({
   const [chats, setChats] = useState<Database["public"]["Tables"]["chats"]["Row"][]>(items);
 
   return (
-    <SidebarGroup title={title} className="!px-0">
-      <SidebarGroupLabel className="!px-0">{title}</SidebarGroupLabel>
-      <SidebarGroupContent className="!px-0">
+    <SidebarGroup title={title} className="px-0!">
+      <SidebarGroupLabel className="px-0!">{title}</SidebarGroupLabel>
+      <SidebarGroupContent className="px-0!">
         <SidebarMenu>
           {chats.map((item, index) => (
             <SidebarMenuItem key={index}>
               <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex">
-                <Link href={`/c/${item.id}`} className="flex-grow">
+                <Link href={`/c/${item.id}`} className="grow">
                   {item.title}
                 </Link>
                 <DropdownMenu>
@@ -63,7 +63,7 @@ export function NavGroup({
                     <DropdownMenuItem asChild>
                       <Button
                         variant="ghost"
-                        className="w-full !text-destructive rounded-lg hover:!text-destructive"
+                        className="w-full text-destructive! rounded-lg hover:text-destructive!"
                         onClick={async () => {
                           const response = await supabase
                             .from("chats")

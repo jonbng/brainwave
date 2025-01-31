@@ -115,7 +115,7 @@ export default function PrivacyPolicy() {
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2">
-                      <ArrowRight className="w-5 h-5 mt-1 flex-shrink-0" />
+                      <ArrowRight className="w-5 h-5 mt-1 shrink-0" />
                       <div>
                         <span className="font-semibold">Vercel:</span>
                         <span className="text-muted-foreground">
@@ -126,7 +126,7 @@ export default function PrivacyPolicy() {
                       </div>
                     </li>
                     <li className="flex items-start gap-2">
-                      <ArrowRight className="w-5 h-5 mt-1 flex-shrink-0" />
+                      <ArrowRight className="w-5 h-5 mt-1 shrink-0" />
                       <div>
                         <span className="font-semibold">Cloudflare:</span>
                         <span className="text-muted-foreground">
@@ -137,7 +137,7 @@ export default function PrivacyPolicy() {
                       </div>
                     </li>
                     <li className="flex items-start gap-2">
-                      <ArrowRight className="w-5 h-5 mt-1 flex-shrink-0" />
+                      <ArrowRight className="w-5 h-5 mt-1 shrink-0" />
                       <div>
                         <span className="font-semibold">Supabase:</span>
                         <span className="text-muted-foreground">

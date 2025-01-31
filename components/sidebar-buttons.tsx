@@ -16,7 +16,7 @@ export default function SidebarButtons() {
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            className="!p-2 !h-10"
+            className="p-2! h-10!"
             onClick={toggleSidebar}
           >
             <svg
@@ -55,7 +55,7 @@ export default function SidebarButtons() {
       </Tooltip>
       <Tooltip delayDuration={300}>
         <TooltipTrigger asChild>
-          <Button variant="ghost" className="!p-2 !h-fit" aria-label="New Chat">
+          <Button variant="ghost" className="p-2! h-fit!" aria-label="New Chat">
             <Link href="/c">
               <svg
                 width="24"

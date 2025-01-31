@@ -114,7 +114,7 @@ export function AppSidebar() {
           )}
         </SidebarContent>
         <SidebarFooter className="flex flex-row">
-          <form action={signOutAction} className="flex-grow">
+          <form action={signOutAction} className="grow">
             <Button variant="ghost" type="submit" className="w-full">
               Log out
             </Button>

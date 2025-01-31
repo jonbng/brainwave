@@ -1,29 +1,29 @@
 # Brainwave
 
-Brainwave is an AI-powered assistant designed specifically for schools. It aims to foster learning without compromising integrity by providing personalized learning experiences, real-time feedback, and collaborative tools.
+Brainwave is an AI-powered assistant designed specifically for schools. Currently, it functions as a chat interface similar to ChatGPT, but the goal is to evolve it into a comprehensive educational tool.
 
-## Features
+## Current Features
 
-- **Privacy First**: End-to-end encryption and strict data protection measures.
-- **Collaborative Learning**: AI-moderated group discussions to foster teamwork.
-- **Instant Feedback**: Real-time assessment and constructive feedback on assignments.
-- **Teacher Monitoring**: Allows teachers to track student progress and engagement.
-- **Guided Assistance**: Helps students do their own work instead of doing it for them.
-- **LMS Integration**: Seamlessly integrates with Google Classroom and other LMS platforms.
+- **Chat Interface**: A basic chat interface where users can interact with the AI.
+- **User Authentication**: Secure user authentication using Supabase.
+- **Message Storage**: Stores chat messages in a Supabase database.
 
-## Quick Stats
+## Planned Features
 
-- **Active Schools**: 500+
-- **Students Helped**: 100,000+
-- **Avg. Grade Improvement**: 15%
+- **Privacy First**: Implement end-to-end encryption and strict data protection measures.
+- **Collaborative Learning**: Introduce AI-moderated group discussions to foster teamwork.
+- **Instant Feedback**: Provide real-time assessment and constructive feedback on assignments.
+- **Teacher Monitoring**: Allow teachers to track student progress and engagement.
+- **Guided Assistance**: Help students do their own work instead of doing it for them.
+- **LMS Integration**: Seamlessly integrate with Google Classroom and other LMS platforms.
 
 ## Privacy Commitment
 
-At Brainwave, we believe in the power of AI to transform education while fiercely protecting the privacy of students and educators. Our privacy practices include:
+At Brainwave, we believe in the power of AI to transform education while fiercely protecting the privacy of students and educators. Our privacy practices will include:
 
-- **Data Encryption**: All data is encrypted end-to-end.
-- **No Data Selling**: We never sell your data.
-- **Transparent Practices**: Our privacy policy is clear, concise, and always accessible.
+- **Data Encryption**: All data will be encrypted end-to-end.
+- **No Data Selling**: We will never sell your data. Your information is yours and yours alone.
+- **Transparent Practices**: Our privacy policy will be clear, concise, and always accessible.
 
 ## Getting Started
 

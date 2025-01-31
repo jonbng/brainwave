@@ -23,11 +23,11 @@ function ChatPageContent() {
         router.push(url);
       } catch (error) {
         // Handle error case
-        router.push("/c");
+        router.refresh();
       }
     } else {
       // Handle error case
-      router.push("/c");
+      router.refresh();
     }
   });
 

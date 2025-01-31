@@ -144,6 +144,7 @@ function SignUpContent({
                 <Input
                   id="name"
                   type="text"
+                  disabled
                   placeholder="Your name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -159,6 +160,7 @@ function SignUpContent({
                   id="email"
                   type="email"
                   placeholder="you@example.com"
+                  disabled
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
@@ -174,13 +176,14 @@ function SignUpContent({
                   type="password"
                   placeholder="••••••••"
                   value={password}
+                  disabled
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10"
                 />
               </div>
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <Button type="submit" className="w-full" disabled={waiting}>
+            <Button type="submit" className="w-full" disabled>
               Sign Up
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

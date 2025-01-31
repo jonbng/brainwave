@@ -112,6 +112,7 @@ function SignInContent({
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="email"
+                  disabled
                   type="email"
                   placeholder="you@example.com"
                   value={email}
@@ -126,6 +127,7 @@ function SignInContent({
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="password"
+                  disabled
                   type="password"
                   placeholder="••••••••"
                   value={password}
@@ -158,7 +160,8 @@ function SignInContent({
             <Button
               type="submit"
               className="w-full"
-              disabled={!email || !password || waiting}
+              // disabled={!email || !password || waiting}
+              disabled
             >
               Sign In
               <ArrowRight className="ml-2 h-4 w-4" />

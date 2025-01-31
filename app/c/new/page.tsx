@@ -2,13 +2,14 @@
 
 import ChatMessages from "@/components/chat-messages";
 import ChatInput from "@/components/chat-input";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { CreateChat } from "./newChatAction";
 import { useTransitionRouter } from "next-view-transitions";
 import { Message } from "ai";
 
-export default function ChatPage({ searchParams }: { searchParams: { message: string } }) {
-  const { message } = searchParams;
+export default function ChatPage() {
+  const searchParams = useSearchParams();
+  const message = searchParams.get("message");
   const router = useTransitionRouter();
 
   if (!message) {

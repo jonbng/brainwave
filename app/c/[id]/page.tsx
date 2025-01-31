@@ -7,8 +7,8 @@ export default async function ChatPage({
   params,
   searchParams,
 }: {
-    params: Promise<{ id: string }>;
-    searchParams: { isNew: string };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ isNew: string }>;
 }) {
   const { id } = await params;
   const { isNew } = await searchParams;

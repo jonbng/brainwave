@@ -15,7 +15,7 @@ export default function ChatMessages({ messages }: { messages: Message[] }) {
   // }
 
   // Filter out all messages with the content "[hidden]"
-  const filteredMessages = messages.filter((message) => message.content !== "[hidonInputChangeden]");
+  const filteredMessages = messages.filter((message) => message.content !== "[hidden]");
 
   return (
     <ScrollArea className="flex-1 p-4">

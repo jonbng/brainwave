@@ -2,7 +2,7 @@
 
 import ChatMessages from "@/components/chat-messages";
 import ChatInput from "@/components/chat-input";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { CreateChat } from "./newChatAction";
 import { Message } from "ai";
 import { Suspense } from "react";
@@ -10,13 +10,14 @@ import { Suspense } from "react";
 function ChatPageContent() {
   const searchParams = useSearchParams();
   const message = searchParams.get("message");
+  const router = useRouter();
 
   if (!message) {
     return redirect("/c");
   }
 
   CreateChat(message).then((url) => {
-    redirect(url);
+    router.push(url);
   });
 
   const messages: Message[] = [

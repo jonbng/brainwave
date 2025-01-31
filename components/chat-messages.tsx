@@ -14,19 +14,19 @@ export default function ChatMessages({ messages }: { messages: Message[] }) {
   //   messages.sort((a, b) => a.createdAt!.getTime() - b.createdAt!.getTime());
   // }
 
+  // Filter out all messages with the content "[hidden]"
+  const filteredMessages = messages.filter((message) => message.content !== "[hidonInputChangeden]");
+
   return (
     <ScrollArea className="flex-1 p-4">
       <div className="max-w-3xl mx-auto space-y-8">
-        {messages.map((message, index) => (
+        {filteredMessages.map((message, index) => (
           <div key={index} className="flex gap-4">
             {/* {!message.isMine && <div className="w-12" />} */}
             {message.role === "user" && <UserAvatar />}
             {message.role === "assistant" && (
               <Avatar>
-                <AvatarImage
-                  src="/brainwave.png"
-                  alt="Brainwave Avatar"
-                />
+                <AvatarImage src="/brainwave.png" alt="Brainwave Avatar" />
                 <AvatarFallback>BW</AvatarFallback>
               </Avatar>
             )}

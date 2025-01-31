@@ -11,6 +11,7 @@ export default async function ChatPage({
     searchParams: { isNew: string };
 }) {
   const { id } = await params;
+  const { isNew } = await searchParams;
   const supabase = await createClient();
 
   const {
@@ -23,7 +24,7 @@ export default async function ChatPage({
     return notFound();
   }
 
-  const messages = (await supabase.from("messages").select().eq("chat_id", id)).data;
+  const messages = (await supabase.from("messages").select().eq("chat_id", Number(id))).data;
 
   if (!messages || messages?.length === 0) {
     console.error("Failed to fetch messages");
@@ -32,6 +33,10 @@ export default async function ChatPage({
   }
 
   return (
-    <ChatUi id={Number(id)} initialMessages={convertToUIMessages(messages)} isNew={searchParams.isNew === "yes"} />
+    <ChatUi
+      id={Number(id)}
+      initialMessages={convertToUIMessages(messages)}
+      isNew={isNew === "yes"}
+    />
   );
 }

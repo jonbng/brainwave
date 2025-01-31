@@ -4,6 +4,7 @@ import { ArrowUp } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ChangeEvent } from "react";
+import { useCallback } from "react";
 
 export default function ChatInput({
   input,
@@ -11,19 +12,19 @@ export default function ChatInput({
   handleSubmit,
   isLoading,
 }: {
-  handleSubmit: () => void;
   input: string;
   handleInputChange: (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => void;
+  handleSubmit: () => void;
   isLoading: boolean;
 }) {
-  function handleEnter() {
+  const handleEnter = useCallback(() => {
     if (input.trim() === "") {
       return;
     }
     handleSubmit();
-  }
+  }, [input, handleSubmit]);
 
   return (
     <div className="relative flex w-[35vw] items-center">

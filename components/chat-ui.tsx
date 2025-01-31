@@ -7,10 +7,20 @@ import { notFound } from "next/navigation";
 import { Message, useChat } from "ai/react";
 import { useTransitionRouter } from "next-view-transitions";
 import { ChatRequestOptions } from "ai";
+import { useEffect, useCallback, useMemo, useState } from "react";
 
-export default function ChatPage({ id, initialMessages, isNew = false }: { id: number, initialMessages?: Message[], isNew?: boolean }) {
+export default function ChatPage({
+  id,
+  initialMessages,
+  isNew = false,
+}: {
+  id: number;
+  initialMessages?: Message[];
+  isNew?: boolean;
+}) {
   const supabase = createClient();
   const router = useTransitionRouter();
+  const [hasRun, setHasRun] = useState(false);
 
   if (!id) {
     return notFound();
@@ -26,7 +36,9 @@ export default function ChatPage({ id, initialMessages, isNew = false }: { id: n
     handleSubmit,
     input,
     handleInputChange,
-    isLoading
+    setInput,
+    append,
+    isLoading,
   } = useChat({
     body: { chat_id: id },
     initialMessages,
@@ -34,25 +46,45 @@ export default function ChatPage({ id, initialMessages, isNew = false }: { id: n
       await supabase.from("messages").insert({
         content: message.content,
         chat_id: id,
-        isUsers: message.role === "user"
+        isUsers: message.role === "user",
       });
     },
   });
 
-  async function handleSubmitWithSave(
-    event?: {
-      preventDefault?: () => void;
-    },
-    chatRequestOptions?: ChatRequestOptions
-  ) {
-    await supabase.from("messages").insert({
-      content: input,
-      chat_id: id,
-      isUsers: true
-    });
+  const memoizedMessages = useMemo(() => messages, [messages]);
 
-    handleSubmit(event, chatRequestOptions);
-  }
+  const handleSubmitWithSave = useCallback(
+    async (
+      event?: {
+        preventDefault?: () => void;
+      },
+      chatRequestOptions?: ChatRequestOptions
+    ) => {
+      await supabase.from("messages").insert({
+        content: input,
+        chat_id: id,
+        isUsers: true,
+      });
+
+      handleSubmit(event, chatRequestOptions);
+    },
+    [input, id, supabase, handleSubmit]
+  );
+
+  useEffect(() => {
+    if (isNew && !hasRun) {
+      setHasRun(true);
+      router.replace(`/c/${id}`);
+      const hiddenMessage = "[hidden]";
+      supabase.from("messages").insert({
+        content: hiddenMessage,
+        chat_id: id,
+        isUsers: true,
+      });
+      setInput(hiddenMessage);
+      append({ content: hiddenMessage, role: "user" });
+    }
+  }, [isNew, id, supabase, router, setInput, append, hasRun]);
 
   if (true) {
     console.log("Streaming data");
@@ -60,7 +92,7 @@ export default function ChatPage({ id, initialMessages, isNew = false }: { id: n
 
   return (
     <div className="w-full h-full flex flex-col">
-      <ChatMessages messages={messages} />
+      <ChatMessages messages={memoizedMessages} />
       <div className="mt-auto mx-auto flex gap-6 flex-col mb-8">
         <ChatInput
           handleSubmit={handleSubmitWithSave}

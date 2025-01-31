@@ -6,8 +6,9 @@ import { redirect, useSearchParams } from "next/navigation";
 import { CreateChat } from "./newChatAction";
 import { useTransitionRouter } from "next-view-transitions";
 import { Message } from "ai";
+import { Suspense } from "react";
 
-export default function ChatPage() {
+function ChatPageContent() {
   const searchParams = useSearchParams();
   const message = searchParams.get("message");
   const router = useTransitionRouter();
@@ -27,7 +28,7 @@ export default function ChatPage() {
       createdAt: new Date(),
       id: "1",
     },
-  ]
+  ];
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -36,5 +37,13 @@ export default function ChatPage() {
         <ChatInput handleSubmit={() => { }} input="" isLoading={true} handleInputChange={(e) => {}} />
       </div>
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ChatPageContent />
+    </Suspense>
   );
 }

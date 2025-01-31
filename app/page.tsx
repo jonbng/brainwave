@@ -24,7 +24,7 @@ function RedirectToCode() {
   if (code) {
     redirect("/auth/callback?code=" + code);
   }
-  
+
   return null;
 }
 
@@ -258,7 +258,7 @@ export default function BrainwaveLanding() {
                 </Card>
               ))}
             </motion.div>
-              <div className="w-full items-center flex justify-center">
+            <div className="w-full items-center flex justify-center">
               <Link href="/privacy" className="mt-10">
                 <Button
                   variant="outline"
@@ -268,7 +268,7 @@ export default function BrainwaveLanding() {
                   Learn More
                 </Button>
               </Link>
-              </div>
+            </div>
           </div>
         </section>
 

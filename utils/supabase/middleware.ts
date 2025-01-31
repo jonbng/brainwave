@@ -42,12 +42,16 @@ export const updateSession = async (request: NextRequest) => {
     const user = await supabase.auth.getUser();
 
     // protected routes
-    if (
-      protectedRoutes.some((route) =>
-        request.nextUrl.pathname.startsWith(route)
-      ) && user.error
-    ) {
-      return NextResponse.redirect(new URL("/sign-in", request.url));
+    try {
+      if (
+        protectedRoutes.some((route) =>
+          request.nextUrl.pathname.startsWith(route)
+        ) && user.error
+      ) {
+        return NextResponse.redirect(new URL("/sign-in", request.url));
+      }
+    } catch (error) {
+      console.error("Error checking protected routes:", error);
     }
 
     if ((request.nextUrl.pathname === "/" || request.nextUrl.pathname === "/privacy") && !user.error) {

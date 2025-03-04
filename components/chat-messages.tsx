@@ -37,7 +37,7 @@ export default function ChatMessages({ messages }: { messages: Message[] }) {
               <div className="prose dark:prose-invert">
                 <Markdown>{message.content}</Markdown>
               </div>
-              {message.role === "assistant" && (
+              {/* {message.role === "assistant" && (
                 <div className="flex gap-2">
                   <Button variant="ghost" size="icon">
                     <Copy className="h-4 w-4" />
@@ -49,7 +49,7 @@ export default function ChatMessages({ messages }: { messages: Message[] }) {
                     <ThumbsDown className="h-4 w-4" />
                   </Button>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         ))}

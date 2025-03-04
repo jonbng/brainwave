@@ -195,10 +195,12 @@ export default function BrainwaveLanding() {
               </div>
               <div>
                 <Card className="h-full">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">Quick Stats</h3>
+                  <CardContent className="p-6 line-through">
+                    <h3 className="text-xl font-semibold mb-2">
+                      Quick Stats
+                    </h3>
                     <ul className="space-y-2">
-                      <li className="flex justify-between">
+                      <li className="flex justify-between ">
                         <span>Active Schools</span>
                         <span className="font-bold">500+</span>
                       </li>

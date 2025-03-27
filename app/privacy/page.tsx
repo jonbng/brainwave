@@ -213,7 +213,7 @@ export default function PrivacyPolicy() {
               Our dedicated privacy team is here to help you understand how we
               protect your data.
             </p>
-            <Link href="mailto:privacy@arctix.dev">
+            <Link href="mailto:privacy@jonathanb.dk">
               <Button size="lg">Contact Privacy Team</Button>
             </Link>
           </div>
@@ -228,12 +228,12 @@ export default function PrivacyPolicy() {
           <p className="text-sm">
             Crafted with ❤️ by{" "}
             <a
-              href="https://arctix.dev"
+              href="https://jonathanb.dk"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:underline"
             >
-              arctix.dev
+              Jonathan Bangert
             </a>
           </p>
         </div>

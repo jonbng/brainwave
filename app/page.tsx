@@ -289,7 +289,7 @@ export default function BrainwaveLanding() {
                   Learn More
                 </Button>
               </Link> */}
-              <Link href="mailto:demo@arctix.dev">
+              <Link href="mailto:demo@jonathanb.dk">
                 <Button
                   size="lg"
                   variant="outline"
@@ -317,7 +317,7 @@ export default function BrainwaveLanding() {
               Privacy Policy
             </Link>
             <Link
-              href="https://github.com/arctixdev/brainwave"
+              href="https://github.com/jonbng/brainwave"
               className="text-muted-foreground hover:text-foreground flex items-center"
             >
               <Github className="w-5 h-5 mr-2" />
@@ -327,12 +327,12 @@ export default function BrainwaveLanding() {
           <div className="mt-4 md:mt-0 text-muted-foreground text-sm">
             Crafted with ❤️ by{" "}
             <a
-              href="https://arctix.dev"
+              href="https://jonathanb.dk"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:underline"
             >
-              arctix.dev
+              Jonathan Bangert
             </a>
           </div>
         </div>
@@ -342,7 +342,7 @@ export default function BrainwaveLanding() {
         className="fixed bottom-4 right-4 text-xs text-muted-foreground pointer-events-none"
         style={{ opacity: Math.max(0, Math.min(1, scrollY / 500)) }}
       >
-        Designed by arctix.dev
+        Designed by Jonathan Bangert
       </div>
     </div>
   );

@@ -1,8 +1,12 @@
-import { GeistSans } from "geist/font/sans";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ViewTransitions } from "next-view-transitions";
+import { Geist } from "next/font/google";
+
+const GeistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+});
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -23,7 +27,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" className={GeistSans.className} suppressHydrationWarning>
         <body className="bg-background text-foreground">
-            <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>{children}</TooltipProvider>
         </body>
       </html>
     </ViewTransitions>

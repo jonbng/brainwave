@@ -1,7 +1,13 @@
-import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import "../globals.css";
 import { ViewTransitions } from "next-view-transitions";
+import { Geist } from "next/font/google";
+
+const GeistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+});
+
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";

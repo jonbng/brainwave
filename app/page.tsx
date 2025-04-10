@@ -53,9 +53,6 @@ export default function BrainwaveLanding() {
             ⚠️ ATTENTION. BRAINWAVE IS NOT A REAL FINISHED PRODUCT. JUST A CONCEPT 🚧
           </b>
           <div className="flex gap-5">
-            <b>
-              ⚠️ ATTENTION. BRAINWAVE IS NOT A REAL FINISHED PRODUCT. JUST A CONCEPT 🚧
-            </b>
             <button onClick={() => setShowBetaWarning(false)}>
               <X size="24" />
             </button>

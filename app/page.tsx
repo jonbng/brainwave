@@ -15,6 +15,7 @@ import {
   MonitorSmartphone,
   GraduationCap,
   School,
+  X,
 } from "lucide-react";
 import { redirect, useSearchParams } from "next/navigation";
 
@@ -37,12 +38,31 @@ export default function BrainwaveLanding() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [showBetaWarning, setShowBetaWarning] = useState(true);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Suspense fallback={null}>
         <RedirectToCode />
       </Suspense>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
+      {showBetaWarning && (
+        <header
+          className="w-full p-5 px-9 bg-yellow-300 flex justify-between"
+        >
+          <b>
+            ⚠️ ATTENTION. BRAINWAVE IS NOT A REAL FINISHED PRODUCT. JUST A CONCEPT 🚧
+          </b>
+          <div className="flex gap-5">
+            <b>
+              ⚠️ ATTENTION. BRAINWAVE IS NOT A REAL FINISHED PRODUCT. JUST A CONCEPT 🚧
+            </b>
+            <button onClick={() => setShowBetaWarning(false)}>
+              <X size="24" />
+            </button>
+          </div>
+        </header>
+      )}
+      <header className="fixed left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b top-15">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
             <BrainCircuit className="w-8 h-8" />
@@ -196,9 +216,7 @@ export default function BrainwaveLanding() {
               <div>
                 <Card className="h-full">
                   <CardContent className="p-6 line-through">
-                    <h3 className="text-xl font-semibold mb-2">
-                      Quick Stats
-                    </h3>
+                    <h3 className="text-xl font-semibold mb-2">Quick Stats</h3>
                     <ul className="space-y-2">
                       <li className="flex justify-between ">
                         <span>Active Schools</span>

@@ -31,7 +31,7 @@ To get started with Brainwave, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/arctixdev/brainwave.git
+    git clone https://github.com/jonbng/brainwave.git
     ```
 2. Install dependencies:
     ```sh
@@ -53,6 +53,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For more information or to request a demo, please contact us at [demo@arctix.dev](mailto:demo@arctix.dev).
+For more information or to request a demo, please contact us at [demo@jonathanb.dk](mailto:demo@jonathanb.dk).
 
-Crafted with ❤️ by [arctix.dev](https://arctix.dev)
+Crafted with ❤️ by [Jonathan Bangert](https://jonathanb.dk)
